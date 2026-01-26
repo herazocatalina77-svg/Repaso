@@ -6,6 +6,8 @@ namespace RepasoFundamentos1
         static void Main(string[] args)
         {
             Menu();
+            string[] listaCanciones1 = ListaCanciones();
+            MostrarLista(listaCanciones1);
         }
 
         static void Menu()
@@ -306,7 +308,7 @@ namespace RepasoFundamentos1
         {
             //Segundo Punto de matrices
         }
-        static void ListaCanciones() //Case 6
+        static string[] ListaCanciones() //Case 6
         {
             //A través de un array
             //Declaración de variables
@@ -354,7 +356,6 @@ namespace RepasoFundamentos1
                     MenucitoCanciones();
                     
                 }
-                
             }
             //Modificar lista de canciones
             //Eliminar canciones de lista
@@ -363,6 +364,7 @@ namespace RepasoFundamentos1
             //Descentemente
             //Escribir la lista en un texto plano
             //Cargar una lista de canciones de un archivo de texto plano
+            return listaCanciones;
         }
         //Menucito para opciones de modificación de lista
         static void MenucitoCanciones() //Case 6.1 - Menú donde estarán todas las opciones que se le pueden aplicar a la lista
@@ -381,7 +383,7 @@ namespace RepasoFundamentos1
                     EliminarCanciones();
                     break;
                 case "2":
-                    MostrarLista();
+                    //MostrarLista();
                     break;
                 case "3":
                     ActualizarCanciones();
@@ -396,12 +398,14 @@ namespace RepasoFundamentos1
             Console.Clear();
             //Variables
             string cancionEliminar = "";
+            int posicionPorCambiar = 0;
             Console.WriteLine("Ingrese el nombre de la canción que desea eliminar");
             cancionEliminar = Console.ReadLine();
         }
-        static void MostrarLista()
+        static void MostrarLista(string[] listaCanciones1)
         {
             Console.Clear();
+
             
         }
         static void ActualizarCanciones()
