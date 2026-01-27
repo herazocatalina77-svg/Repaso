@@ -24,8 +24,8 @@ namespace RepasoFundamentos1
                 Console.WriteLine("Ingrese 2 para acceder al segundo punto");
                 Console.WriteLine("Ingrese 3 para acceder al tercer punto");
                 Console.WriteLine("Ingrese 4 para acceder al cuarto punto");
-                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); 
-                Console.WriteLine("Ingrese 6 para acceder al sexto punto");
+                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); //PROBAR LA SUMA POR VENDEDOR
+                Console.WriteLine("Ingrese 6 para acceder al sexto punto"); //PROBAR OPCIONES DEL SUBMENÚ
                 numeroPunto = Int32.Parse(Console.ReadLine());
                 switch (numeroPunto)
                 {
@@ -380,8 +380,8 @@ namespace RepasoFundamentos1
                     matrizVentas[i, j] = totalVentasPrecio;
                     //Suma de ventas por cada vendedor
                     //Convertir los datos de la matriz a int para poderla operar
-                    sumaTotalVendedor += int.Parse(totalVentasPrecio);
-                    if (j > matrizVentas.GetLength(1))
+                    sumaTotalVendedor += int.Parse(matrizVentas[i,j]);
+                    if (i > matrizVentas.GetLength(0))
                     {
                         sumaVentasVendedor[i] = sumaTotalVendedor;
                     }
@@ -436,10 +436,10 @@ namespace RepasoFundamentos1
                     }
                     Console.WriteLine();
                 }
-                Console.WriteLine("La suma de las ventas por vendedor son:");
+                Console.WriteLine("SUMA TOTAL DE VENTAS POR VENDEDOR");
                 for (int i = 0; i < sumaVentasVendedor.Length; i++)
                 {
-                    Console.WriteLine($"{filasVendedores[i]},{sumaVentasVendedor[i]}");
+                    Console.WriteLine($"Resultados del vendedor {i+1}: {filasVendedores[i]},{sumaVentasVendedor[i]}");
                 }
                 //Columna 1 de vendedores
                 //Columna 2 de total de ventas por vendedor
