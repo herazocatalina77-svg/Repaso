@@ -241,8 +241,8 @@ namespace RepasoFundamentos1
             Console.Clear();
             //Variables locales para asignar los números en el submenú
             string opcionesMenuCase5 = "";
-            Console.WriteLine("Ingrese 1 para ir al primer enunciado de matrices(PROBAR, IMPORTAMTE)");
-            Console.WriteLine("Ingrese 2 para ir al segundo enunciado de matrices (NO LISTO)");
+            Console.WriteLine("Ingrese 1 para ir al primer enunciado de matrices(PROBAR)");
+            Console.WriteLine("Ingrese 2 para ir al segundo enunciado de matrices (PROBAR, IMPORTANTE)");
             Console.WriteLine("Ingrese 3 para volver al menú principal");
             opcionesMenuCase5 = Console.ReadLine();
             if (opcionesMenuCase5 == "1")
@@ -261,6 +261,7 @@ namespace RepasoFundamentos1
 
         static void OperacionesMatrices1() //Case 5.1
         {
+            Console.Clear();
             Console.WriteLine("Implementar un programa que sume dos matrices y multiplique dos matrices");
             //Declarando matrices 
             int[,] matriz1;
@@ -306,10 +307,112 @@ namespace RepasoFundamentos1
 
         static void OperacionesMatrices2() //Case 5.2
         {
+            Console.Clear();
             //Segundo Punto de matrices
+            //Variables 
+            string vendedores; //Variable que se usa para ingresar la columna de los vendedores
+            string totalVentasPrecio; //Dato que llenas en la matriz
+            string[] filasVendedores; //Columna de los vendedores
+            string[] columnasAños; 
+            string[,] matrizVentas; //Matriz donde están las ventas
+            string[,] matrizInfoTotal; //Matriz donde en la primera columna se muestren los vendedores, y en la primera fila se muestren los años
+            int añoInicial = 0;
+            int añoActual = 0;
+            int cantidadVendedores;
+            Console.WriteLine("Ingrese el año inicial de las ventas");
+            añoInicial = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese el año actual de las ventas");
+            añoActual = Int32.Parse(Console.ReadLine());
+            int cantidadAñosVentas = añoActual - añoInicial;
+            columnasAños = new string[cantidadAñosVentas];
+            Console.WriteLine("Ingrese la cantidad de vendedores");
+            cantidadVendedores = Int32.Parse(Console.ReadLine());
+            filasVendedores = new string[cantidadVendedores];
+            matrizVentas = new string[cantidadVendedores, cantidadAñosVentas];
+            //Array que llena los vendedores
+            for (int i = 0; i < filasVendedores.Length; i++)
+            {
+                Console.Clear();
+                Console.WriteLine($"Ingrese el vendedor {i+1}");
+                vendedores = Console.ReadLine();
+                filasVendedores[i] = vendedores;
+            }
+            //Array años
+            for (int i = 0; i < columnasAños.Length; i++)
+            {
+                columnasAños[i] = añoInicial.ToString();
+                añoInicial++;
+            }
+            //Matriz con la cantidad de ventas
+            for (int i = 0; i < matrizVentas.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrizVentas.GetLength(1); j++)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Ingrese la cantidad de ventas hechas por el vendedor {filasVendedores[i]} en el año {columnasAños[j]}");
+                    totalVentasPrecio = Console.ReadLine();
+                    matrizVentas[i, j] = totalVentasPrecio;
+                }
+            }
+            matrizInfoTotal = new string[cantidadVendedores+1, cantidadAñosVentas + 1];
+            for (int i = 1; i < matrizInfoTotal.GetLength(0); i++)
+            {
+                for (int j = 1; j < matrizInfoTotal.GetLength(1); j++)
+                {
+                    matrizInfoTotal[0, 0] = "";
+                    matrizInfoTotal[i, 0] = filasVendedores[i - 1];
+                    matrizInfoTotal[0, j] = columnasAños[j - 1];
+                    matrizInfoTotal[i, j] = matrizVentas[i-1, j-1];
+
+                }
+            }
+            //ARRAY CON SUMA DE VENTAS IMPORTANTE
+            int verInfoVentas = 0;
+            Console.WriteLine("¿Desea ver la información de las ventas?");
+            Console.WriteLine("Ingrese 1 para ver la información");
+            verInfoVentas = Int32.Parse(Console.ReadLine());
+            if (verInfoVentas == 1)
+            {
+                Console.Clear();
+                Console.WriteLine("La información total de las ventas es:");
+
+                int filas = matrizInfoTotal.GetLength(0);
+                int columnas = matrizInfoTotal.GetLength(1);
+
+                // 1️⃣ Encontrar el texto más largo (para ajustar columnas)
+                int ancho = 0;
+                for (int i = 0; i < filas; i++)
+                {
+                    for (int j = 0; j < columnas; j++)
+                    {
+                        if (matrizInfoTotal[i, j] != null && matrizInfoTotal[i, j].Length > ancho)
+                        {
+                            ancho = matrizInfoTotal[i, j].Length;
+                        }
+                    }
+                }
+
+                ancho += 4; // Espacio extra entre columnas
+
+                // 2️⃣ Imprimir matriz alineada
+                for (int i = 0; i < filas; i++)
+                {
+                    for (int j = 0; j < columnas; j++)
+                    {
+                        Console.Write(matrizInfoTotal[i, j].PadRight(ancho));
+                    }
+                    Console.WriteLine();
+                }
+                Console.ReadLine();
+            }
+            else 
+            {
+
+            }
         }
         static string[] ListaCanciones() //Case 6
         {
+            Console.Clear();
             //A través de un array
             //Declaración de variables
             int cantidadCanciones = 0; //Tamaño del array
@@ -345,7 +448,7 @@ namespace RepasoFundamentos1
                 {
                     Console.WriteLine("Haz llegado a la capacidad máxima de canciones");
                     Console.WriteLine("Entonces serás redirigido al menú de  las canciones");
-                    MenucitoCanciones();
+                    MenucitoCanciones(listaCanciones);
                 }
                 if (seguirIngresando == 0)
                 {
@@ -353,7 +456,7 @@ namespace RepasoFundamentos1
                 }
                 else
                 {
-                    MenucitoCanciones();
+                    MenucitoCanciones(listaCanciones);
                     
                 }
             }
@@ -367,7 +470,7 @@ namespace RepasoFundamentos1
             return listaCanciones;
         }
         //Menucito para opciones de modificación de lista
-        static void MenucitoCanciones() //Case 6.1 - Menú donde estarán todas las opciones que se le pueden aplicar a la lista
+        static void MenucitoCanciones(string[] listacanciones) //Case 6.1 - Menú donde estarán todas las opciones que se le pueden aplicar a la lista
         {
             Console.Clear();
             //Variables que controlan el submenú
@@ -383,7 +486,7 @@ namespace RepasoFundamentos1
                     EliminarCanciones();
                     break;
                 case "2":
-                    //MostrarLista();
+                    MostrarLista(listacanciones);
                     break;
                 case "3":
                     ActualizarCanciones();
