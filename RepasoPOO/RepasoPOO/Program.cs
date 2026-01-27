@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace RepasoFundamentos1
 {
     internal class Program
@@ -8,6 +9,8 @@ namespace RepasoFundamentos1
             Menu();
             string[] listaCanciones1 = ListaCanciones();
             MostrarLista(listaCanciones1);
+            EliminarCanciones(listaCanciones1);
+            ActualizarCanciones(listaCanciones1);
         }
 
         static void Menu()
@@ -18,11 +21,11 @@ namespace RepasoFundamentos1
                 Console.Clear();
                 Console.WriteLine("Ingrese el número del punto que desea ver");
                 Console.WriteLine("Ingrese 1 para acceder al primer punto"); //LISTO COMPLETO
-                Console.WriteLine("Ingrese 2 para acceder al segundo punto");//PROBAR
+                Console.WriteLine("Ingrese 2 para acceder al segundo punto");//LISTO COMPLETO
                 Console.WriteLine("Ingrese 3 para acceder al tercer punto");//LISTO
                 Console.WriteLine("Ingrese 4 para acceder al cuarto punto");//LISTO
-                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); //SEGUNDO ENUNCIADO SIN HACER
-                Console.WriteLine("Ingrese 6 para acceder al sexto punto (NO ENTRAR, NO COMPLETO)"); //1/2
+                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); //Un tricito left, absolutamente nada :(((((((((((
+                Console.WriteLine("Ingrese 6 para acceder al sexto punto"); //Ya no tengo ni idea la verdad
                 numeroPunto = Int32.Parse(Console.ReadLine());
                 switch (numeroPunto)
                 {
@@ -71,7 +74,9 @@ namespace RepasoFundamentos1
                 acumulador += i;
                 Console.WriteLine(acumulador);
             }
-
+            Console.WriteLine("Presione cualquier tecla para volver al menú principal");
+            Console.ReadKey();
+            Menu();
         }
 
         static void Llamadas() //case 2
@@ -94,13 +99,19 @@ namespace RepasoFundamentos1
             {
 
                 Console.WriteLine("El precio de su llamada es de 0.50");
+                Console.WriteLine("Presione cualquier tecla para volver al menú principal");
+                Console.ReadKey();
+                Menu();
             }
             else
             {
                 int cantidadMinutosExtra = cantidadMinutos - 3;
                 double precio = cantidadMinutosExtra * 0.50;
                 double finalPrecio = precio + 0.50;
-                Console.WriteLine($"El precio de su llamada es {finalPrecio}");
+                Console.WriteLine($"El precio de su llamada es  de {finalPrecio} dólares");
+                Console.WriteLine("Presione cualquier tecla para volver al menú principal");
+                Console.ReadKey();
+                Menu();
             }
         }
 
@@ -139,8 +150,11 @@ namespace RepasoFundamentos1
             {
                 for (int i = 0; i < vectorcito.Length; i++)
                 {
-                    Console.WriteLine($"El vector en la posición {i+1} es {vectorcito[i]}");
+                    Console.WriteLine($"El vector en la posición {i + 1} es {vectorcito[i]}");
                 }
+                Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                Console.ReadKey();
+                Menu();
             }
             else
             {
@@ -219,6 +233,9 @@ namespace RepasoFundamentos1
             {
                 Console.WriteLine($"{numerosFila1[i]},{numerosFila2[i]},{numerosFila3[i]}");
             }
+            Console.WriteLine("Presione cualquier tecla para volver al menú principal");
+            Console.ReadKey();
+            Menu();
         }
         static void CiclosSegundoEnunciado() //Case 4.2
         {
@@ -234,15 +251,18 @@ namespace RepasoFundamentos1
                 }
                 numero++;
             }
-            while (numero < 205) ;
+            while (numero < 205);
+            Console.WriteLine("Presione cualquier letra para regresar al menú principal");
+            Console.ReadKey();
+            Menu();
         }
         static void MenuPuntosMatrices() //Case 5
         {
             Console.Clear();
             //Variables locales para asignar los números en el submenú
             string opcionesMenuCase5 = "";
-            Console.WriteLine("Ingrese 1 para ir al primer enunciado de matrices(PROBAR)");
-            Console.WriteLine("Ingrese 2 para ir al segundo enunciado de matrices (PROBAR, IMPORTANTE)");
+            Console.WriteLine("Ingrese 1 para ir al primer enunciado de matrices");
+            Console.WriteLine("Ingrese 2 para ir al segundo enunciado de matrices");
             Console.WriteLine("Ingrese 3 para volver al menú principal");
             opcionesMenuCase5 = Console.ReadLine();
             if (opcionesMenuCase5 == "1")
@@ -303,6 +323,9 @@ namespace RepasoFundamentos1
                     Console.WriteLine(multiplicacionMatrices[i,j]);
                 }
             }
+            Console.WriteLine("Presione cualquier tecla para volver al menú principal");
+            Console.ReadKey();
+            Menu();
         }
 
         static void OperacionesMatrices2() //Case 5.2
@@ -319,6 +342,7 @@ namespace RepasoFundamentos1
             int añoInicial = 0;
             int añoActual = 0;
             int cantidadVendedores;
+            int resultado = 0;
             Console.WriteLine("Ingrese el año inicial de las ventas");
             añoInicial = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el año actual de las ventas");
@@ -352,9 +376,13 @@ namespace RepasoFundamentos1
                     Console.WriteLine($"Ingrese la cantidad de ventas hechas por el vendedor {filasVendedores[i]} en el año {columnasAños[j]}");
                     totalVentasPrecio = Console.ReadLine();
                     matrizVentas[i, j] = totalVentasPrecio;
+                    //Convirtiendo de string a tipo int para que se pueda operar
+                    //Acumulador
+                    resultado += int.Parse(matrizVentas[i, j]);
                 }
             }
-            matrizInfoTotal = new string[cantidadVendedores+1, cantidadAñosVentas + 1];
+            //Suma de cada columna: La suma total de todos los años de cada vendedor
+            matrizInfoTotal = new string[cantidadVendedores+1, cantidadAñosVentas + 1]; //Se le suma una columna y una fila que es donde se ponen la información de los vendedores y los años
             for (int i = 1; i < matrizInfoTotal.GetLength(0); i++)
             {
                 for (int j = 1; j < matrizInfoTotal.GetLength(1); j++)
@@ -366,21 +394,19 @@ namespace RepasoFundamentos1
 
                 }
             }
-            //ARRAY CON SUMA DE VENTAS IMPORTANTE
             int verInfoVentas = 0;
             Console.WriteLine("¿Desea ver la información de las ventas?");
             Console.WriteLine("Ingrese 1 para ver la información");
+            Console.WriteLine("Ingrese otro número para regresar al menú principal");
             verInfoVentas = Int32.Parse(Console.ReadLine());
             if (verInfoVentas == 1)
             {
                 Console.Clear();
                 Console.WriteLine("La información total de las ventas es:");
 
-                int filas = matrizInfoTotal.GetLength(0);
-                int columnas = matrizInfoTotal.GetLength(1);
-
-                // 1️⃣ Encontrar el texto más largo (para ajustar columnas)
-                int ancho = 0;
+                int filas = matrizInfoTotal.GetLength(0); //Filas de la matriz
+                int columnas = matrizInfoTotal.GetLength(1); //Columnas de la matriz
+                int ancho = 0; 
                 for (int i = 0; i < filas; i++)
                 {
                     for (int j = 0; j < columnas; j++)
@@ -394,20 +420,27 @@ namespace RepasoFundamentos1
 
                 ancho += 4; // Espacio extra entre columnas
 
-                // 2️⃣ Imprimir matriz alineada
+                //Mostrando matriz con info completa
                 for (int i = 0; i < filas; i++)
                 {
                     for (int j = 0; j < columnas; j++)
                     {
-                        Console.Write(matrizInfoTotal[i, j].PadRight(ancho));
+                        Console.Write(matrizInfoTotal[i, j].PadRight(ancho)); //utilizado para alinear el texto
                     }
                     Console.WriteLine();
                 }
-                Console.ReadLine();
+                Console.WriteLine("La suma de las ventas por vendedor son:");
+                Console.WriteLine(resultado); //suma de ventas en total 
+                //COMO SE SUMA CADA COLUMNA SI TENGO QUE ESPERAR A QUE EL USUARIO INGRESE CUANTAS COLUMNAS  VAN A SER 
+                //Columna 1 de vendedores
+                //Columna 2 de total de ventas por vendedor
+                Console.WriteLine("Presione cualquier tecla para volver al menú principal");
+                Console.ReadKey();
+                Menu();
             }
             else 
             {
-
+                Menu();
             }
         }
         static string[] ListaCanciones() //Case 6
@@ -423,13 +456,12 @@ namespace RepasoFundamentos1
             cantidadCanciones = Int32.Parse(Console.ReadLine());
             //Declarando e inicializando el vector 
             string[] listaCanciones = new string [cantidadCanciones];
-            Console.Clear();
             for (int i = 0; i < listaCanciones.Length;)
             {
+                Console.Clear();
                 Console.WriteLine($"Ingrese la canción {i+1}");
                 canciones = Console.ReadLine().ToUpper();
-                listaCanciones[i] = canciones;
-                if (listaCanciones [i] == listaCanciones[i])
+                if (listaCanciones [i] == canciones)
                 {
                     //Condicional para identificar canciones repetidas antes de preguntar por más canciones
                     Console.WriteLine("La canción ingresada ya se encuentra en la lista");
@@ -437,27 +469,33 @@ namespace RepasoFundamentos1
                 else
                 {
                     //Se sabe que la canción no es repetida, y que el array no se ha llenado, entonces se suma el contador
-                    i++;
-                }
-                Console.Clear();
-                Console.WriteLine("¿Desea ingresar otra canción?");
-                Console.WriteLine("Si desea seguir colocando canciones, ingrese el número 0");
-                Console.WriteLine("Si no desea seguir ingresando canciones, ingrese el número 1");
-                seguirIngresando = Int32.Parse (Console.ReadLine());
-                if (seguirIngresando == 0 && i>listaCanciones.Length)
-                {
-                    Console.WriteLine("Haz llegado a la capacidad máxima de canciones");
-                    Console.WriteLine("Entonces serás redirigido al menú de  las canciones");
-                    MenucitoCanciones(listaCanciones);
-                }
-                if (seguirIngresando == 0)
-                {
-                    //Se continua el ciclo, y el proceso del for
-                }
-                else
-                {
-                    MenucitoCanciones(listaCanciones);
+                    listaCanciones[i] = canciones;
+                    Console.Clear();
+                    Console.WriteLine("¿Desea ingresar otra canción?");
+                    Console.WriteLine("Si desea seguir colocando canciones, ingrese el número 0");
+                    Console.WriteLine("Si no desea seguir ingresando canciones, ingrese el número 1");
+                    seguirIngresando = Int32.Parse (Console.ReadLine());
+                    if (seguirIngresando == 0 && i>listaCanciones.Length)
+                    {
+                        Console.WriteLine("Haz llegado a la capacidad máxima de canciones");
+                        Console.WriteLine("Entonces serás redirigido al menú de modificación de la lista de canciones");
+                        Console.WriteLine("Presione cualquier tecla");
+                        Console.ReadKey();
+                        MenucitoCanciones(listaCanciones);
+                        return listaCanciones; //El array se llenó y llegó a su proceso final, entonces se devuelve el valor de la lista
+                    }
+                    if (seguirIngresando == 0)
+                    {
+                        //Se continua el ciclo, y el proceso del for
+                        i++;
+                    }
+                    else
+                    {
+                        //Se rompe el for, dejando espacios del array vacíos para llenarlos después
+                        MenucitoCanciones(listaCanciones);
+                        return listaCanciones;
                     
+                    }
                 }
             }
             //Modificar lista de canciones
@@ -475,45 +513,126 @@ namespace RepasoFundamentos1
             Console.Clear();
             //Variables que controlan el submenú
             string opcionesLista = "";
-            Console.WriteLine("Ingrese el número 1 para eliminar las canciones de la lista");
+            Console.WriteLine("SUBMENÚ DE LAS CANCIONES");
+            Console.WriteLine("Ingrese el número 1 para eliminar las canciones de la lista ");
             Console.WriteLine("Ingrese el número 2 para mostrar la lista de canciones");
-            Console.WriteLine("Ingrese el número 3 para actualizar un nombre de la lista de canciones");
+            Console.WriteLine("Ingrese el número 3 para actualizar un nombre de la lista de canciones ");
             Console.WriteLine("Ingrese otra opción para volver al número inicial");
             opcionesLista = Console.ReadLine();
             switch (opcionesLista)
             {
                 case "1":
-                    EliminarCanciones();
+                    EliminarCanciones(listacanciones);
                     break;
                 case "2":
                     MostrarLista(listacanciones);
                     break;
                 case "3":
-                    ActualizarCanciones();
+                    ActualizarCanciones(listacanciones);
                     break;
                 default:
                     Menu();
                     break;
             }
         }
-        static void EliminarCanciones()
+        static void EliminarCanciones(string[] listaCanciones1)
         {
             Console.Clear();
             //Variables
             string cancionEliminar = "";
-            int posicionPorCambiar = 0;
+            int posicionCancionEliminar = 0;
             Console.WriteLine("Ingrese el nombre de la canción que desea eliminar");
-            cancionEliminar = Console.ReadLine();
+            cancionEliminar = Console.ReadLine().ToUpper();
+            //Se recorre el array para encontrar la posición de la canción
+            for (int i = 0; i < listaCanciones1.Length; i++)
+            {
+                if (cancionEliminar == listaCanciones1[i])
+                {
+                    break; //Rompe el ciclo del for  
+                    i = posicionCancionEliminar;
+                    listaCanciones1[posicionCancionEliminar] = "";
+                    Console.WriteLine("Canción eliminada");
+                    Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                    Console.ReadKey();
+                    Menu();
+                }
+                else
+                {
+                    //Continua el ciclo del for 
+                }
+            }
+            Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+            Console.ReadKey();
+            Menu();
         }
         static void MostrarLista(string[] listaCanciones1)
         {
+            //Variables 
+            string[,] mostrarLista = new string[2, listaCanciones1.Length];
+            //primera columna: lista ascendente
+            //segunda columna: lista descendente
             Console.Clear();
-
-            
+            //Llenando la primera columna de la matriz
+            for (int i = 0; i < mostrarLista.GetLength(0); i++)
+            {
+                for (int j = 0; j < mostrarLista.GetLength(1); j++)
+                {
+                    mostrarLista[0, j] = listaCanciones1[i];
+                }
+            }
+            //Llenando la segunda columna de la matriz
+            for (int i = 0; i < mostrarLista.GetLength(0); i++)
+            {
+                for (int j = mostrarLista.GetLength(1)-1; j < 0; j++)
+                {
+                    mostrarLista[1, j] = listaCanciones1[i];
+                }
+            }
+            //Mostrando la matriz de las canciones
+            Console.WriteLine("La lista de las canciones es:");
+            for (int i = 0; i < mostrarLista.GetLength(0); i++)
+            {
+                for (int j = 0; j < mostrarLista.GetLength(1); j++)
+                {
+                    Console.WriteLine(mostrarLista[i,j]);
+                }
+            }
+            Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+            Console.ReadKey();
+            Menu();
         }
-        static void ActualizarCanciones()
+        static void ActualizarCanciones(string[] listaCanciones1)
         {
             Console.Clear();
+            //Variables
+            string cancionCambiar = "";
+            int posicionCancionCambiar = 0;
+            string nuevaCanción = "";
+            Console.WriteLine("Ingrese el nombre de la canción que desea eliminar");
+            cancionCambiar = Console.ReadLine().ToUpper();
+            Console.WriteLine("Ingrese el nombre de la nueva canción");
+            nuevaCanción = Console.ReadLine();
+            //Se recorre el array para encontrar la posición de la canción
+            for (int i = 0; i < listaCanciones1.Length; i++)
+            {
+                if (cancionCambiar == listaCanciones1[i])
+                {
+                    break; //Rompe el ciclo del for  
+                    i = posicionCancionCambiar;
+                    listaCanciones1[posicionCancionCambiar] = nuevaCanción;
+                    Console.WriteLine("Canción actualizada");
+                    Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                    Console.ReadKey();
+                    Menu();
+                }
+                else
+                {
+                    //Continua el ciclo del for 
+                }
+                Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                Console.ReadKey();
+                Menu();
+            }
         }
     }
 }
