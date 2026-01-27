@@ -20,12 +20,12 @@ namespace RepasoFundamentos1
             {
                 Console.Clear();
                 Console.WriteLine("Ingrese el número del punto que desea ver");
-                Console.WriteLine("Ingrese 1 para acceder al primer punto"); //LISTO COMPLETO
-                Console.WriteLine("Ingrese 2 para acceder al segundo punto");//LISTO COMPLETO
-                Console.WriteLine("Ingrese 3 para acceder al tercer punto");//LISTO
-                Console.WriteLine("Ingrese 4 para acceder al cuarto punto");//LISTO
-                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); //Un tricito left, absolutamente nada :(((((((((((
-                Console.WriteLine("Ingrese 6 para acceder al sexto punto"); //Ya no tengo ni idea la verdad
+                Console.WriteLine("Ingrese 1 para acceder al primer punto"); 
+                Console.WriteLine("Ingrese 2 para acceder al segundo punto");
+                Console.WriteLine("Ingrese 3 para acceder al tercer punto");
+                Console.WriteLine("Ingrese 4 para acceder al cuarto punto");
+                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); 
+                Console.WriteLine("Ingrese 6 para acceder al sexto punto");
                 numeroPunto = Int32.Parse(Console.ReadLine());
                 switch (numeroPunto)
                 {
@@ -334,15 +334,14 @@ namespace RepasoFundamentos1
             //Segundo Punto de matrices
             //Variables 
             string vendedores; //Variable que se usa para ingresar la columna de los vendedores
-            string totalVentasPrecio; //Dato que llenas en la matriz
+            string totalVentasPrecio; //Dato que llenas en la matriz que se usa para saber la cantidad de ventas que tuvo un vendedor en tal año específico
             string[] filasVendedores; //Columna de los vendedores
-            string[] columnasAños; 
+            string[] columnasAños; //Un array con los años, al cual según el vendedor se le van a asignar una cantidad de ventas 
             string[,] matrizVentas; //Matriz donde están las ventas
             string[,] matrizInfoTotal; //Matriz donde en la primera columna se muestren los vendedores, y en la primera fila se muestren los años
-            int añoInicial = 0;
-            int añoActual = 0;
-            int cantidadVendedores;
-            int resultado = 0;
+            int añoInicial = 0; //Año donde se empiezan a contar las ventas
+            int añoActual = 0; //último año donde se cuentan las ventas
+            int cantidadVendedores; //cantidad de vendedores en total
             Console.WriteLine("Ingrese el año inicial de las ventas");
             añoInicial = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese el año actual de las ventas");
@@ -353,6 +352,9 @@ namespace RepasoFundamentos1
             cantidadVendedores = Int32.Parse(Console.ReadLine());
             filasVendedores = new string[cantidadVendedores];
             matrizVentas = new string[cantidadVendedores, cantidadAñosVentas];
+            //Variable que cada casilla va a representar la suma total de cada vendedor a lo largo de los años
+            int[] sumaVentasVendedor = new int[cantidadVendedores];
+            int sumaTotalVendedor = 0;
             //Array que llena los vendedores
             for (int i = 0; i < filasVendedores.Length; i++)
             {
@@ -376,9 +378,14 @@ namespace RepasoFundamentos1
                     Console.WriteLine($"Ingrese la cantidad de ventas hechas por el vendedor {filasVendedores[i]} en el año {columnasAños[j]}");
                     totalVentasPrecio = Console.ReadLine();
                     matrizVentas[i, j] = totalVentasPrecio;
-                    //Convirtiendo de string a tipo int para que se pueda operar
-                    //Acumulador
-                    resultado += int.Parse(matrizVentas[i, j]);
+                    //Suma de ventas por cada vendedor
+                    //Convertir los datos de la matriz a int para poderla operar
+                    sumaTotalVendedor += int.Parse(totalVentasPrecio);
+                    if (j > matrizVentas.GetLength(1))
+                    {
+                        sumaVentasVendedor[i] = sumaTotalVendedor;
+                    }
+
                 }
             }
             //Suma de cada columna: La suma total de todos los años de cada vendedor
@@ -430,8 +437,10 @@ namespace RepasoFundamentos1
                     Console.WriteLine();
                 }
                 Console.WriteLine("La suma de las ventas por vendedor son:");
-                Console.WriteLine(resultado); //suma de ventas en total 
-                //COMO SE SUMA CADA COLUMNA SI TENGO QUE ESPERAR A QUE EL USUARIO INGRESE CUANTAS COLUMNAS  VAN A SER 
+                for (int i = 0; i < sumaVentasVendedor.Length; i++)
+                {
+                    Console.WriteLine($"{filasVendedores[i]},{sumaVentasVendedor[i]}");
+                }
                 //Columna 1 de vendedores
                 //Columna 2 de total de ventas por vendedor
                 Console.WriteLine("Presione cualquier tecla para volver al menú principal");
