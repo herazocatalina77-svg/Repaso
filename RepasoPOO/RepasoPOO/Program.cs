@@ -24,7 +24,7 @@ namespace RepasoFundamentos1
                 Console.WriteLine("Ingrese 2 para acceder al segundo punto");
                 Console.WriteLine("Ingrese 3 para acceder al tercer punto");
                 Console.WriteLine("Ingrese 4 para acceder al cuarto punto");
-                Console.WriteLine("Ingrese 5 para acceder al quinto punto"); //PROBAR LA SUMA POR VENDEDOR
+                Console.WriteLine("Ingrese 5 para acceder al quinto punto");
                 Console.WriteLine("Ingrese 6 para acceder al sexto punto"); //PROBAR OPCIONES DEL SUBMENÚ
                 numeroPunto = Int32.Parse(Console.ReadLine());
                 switch (numeroPunto)
@@ -334,7 +334,7 @@ namespace RepasoFundamentos1
             //Segundo Punto de matrices
             //Variables 
             string vendedores; //Variable que se usa para ingresar la columna de los vendedores
-            string totalVentasPrecio; //Dato que llenas en la matriz que se usa para saber la cantidad de ventas que tuvo un vendedor en tal año específico
+            string totalVentasPrecio = ""; //Dato que llenas en la matriz que se usa para saber la cantidad de ventas que tuvo un vendedor en tal año específico
             string[] filasVendedores; //Columna de los vendedores
             string[] columnasAños; //Un array con los años, al cual según el vendedor se le van a asignar una cantidad de ventas 
             string[,] matrizVentas; //Matriz donde están las ventas
@@ -380,10 +380,12 @@ namespace RepasoFundamentos1
                     matrizVentas[i, j] = totalVentasPrecio;
                     //Suma de ventas por cada vendedor
                     //Convertir los datos de la matriz a int para poderla operar
-                    sumaTotalVendedor += int.Parse(matrizVentas[i,j]);
-                    if (i > matrizVentas.GetLength(0))
+                    sumaTotalVendedor += int.Parse(totalVentasPrecio);
+                    if (j == matrizVentas.GetLength(1) - 1)
                     {
                         sumaVentasVendedor[i] = sumaTotalVendedor;
+                        sumaTotalVendedor = 0;
+
                     }
 
                 }
