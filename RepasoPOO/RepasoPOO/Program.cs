@@ -571,18 +571,18 @@ namespace RepasoFundamentos1
                     i = posicionCancionEliminar;
                     listaCanciones1[posicionCancionEliminar] = "";
                     Console.WriteLine("Canción eliminada");
-                    Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                    Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                     Console.ReadKey();
-                    Menu();
+                    MenucitoCanciones(listaCanciones1);
                 }
                 else
                 {
                     //Continua el ciclo del for 
                 }
             }
-            Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+            Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
             Console.ReadKey();
-            Menu();
+            MenucitoCanciones(listaCanciones1);
         }
         static void MostrarLista(string[] listaCanciones1)
         {
@@ -612,9 +612,9 @@ namespace RepasoFundamentos1
             {
                 Console.WriteLine($"{listaAscendente[i]},{listaDescendente[i]}");
             }
-            Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+            Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
             Console.ReadKey();
-            Menu();
+            MenucitoCanciones(listaCanciones1);
         }
         static void ActualizarCanciones(string[] listaCanciones1)
         {
@@ -636,23 +636,25 @@ namespace RepasoFundamentos1
                     i = posicionCancionCambiar;
                     listaCanciones1[posicionCancionCambiar] = nuevaCanción;
                     Console.WriteLine("Canción actualizada");
-                    Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                    Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                     Console.ReadKey();
-                    Menu();
+                    MenucitoCanciones(listaCanciones1);
                 }
                 else
                 {
                     //Continua el ciclo del for 
                 }
-                Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
+                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                 Console.ReadKey();
-                Menu();
+                MenucitoCanciones(listaCanciones1);
             }
         }
         static void EscribirArchivoTexto(string[] listaCanciones1)
         {
             File.WriteAllLines("canciones.txt", listaCanciones1);
-
+            Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+            Console.ReadKey();
+            MenucitoCanciones(listaCanciones1);
         }
     }
 }
