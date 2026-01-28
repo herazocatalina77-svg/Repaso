@@ -488,7 +488,7 @@ namespace RepasoFundamentos1
                     Console.WriteLine("Si desea seguir colocando canciones, ingrese el número 0");
                     Console.WriteLine("Si no desea seguir ingresando canciones, ingrese el número 1");
                     seguirIngresando = Int32.Parse (Console.ReadLine());
-                    if (seguirIngresando == 0 && i>listaCanciones.Length)
+                    if (seguirIngresando == 0 && i == listaCanciones.Length-1)
                     {
                         Console.WriteLine("Haz llegado a la capacidad máxima de canciones");
                         Console.WriteLine("Entonces serás redirigido al menú de modificación de la lista de canciones");
