@@ -472,16 +472,10 @@ namespace RepasoFundamentos1
                 Console.Clear();
                 Console.WriteLine($"Ingrese la canción {i+1}");
                 canciones = Console.ReadLine().ToUpper();
-                if (listaCanciones [i] == canciones)
-                {
-                    //Condicional para identificar canciones repetidas antes de preguntar por más canciones
-                    Console.WriteLine("La canción ingresada ya se encuentra en la lista");
-                    Console.WriteLine("Presione cualquier tecla para continuar");
-                    Console.ReadKey();
-                }
-                else
+                if (listaCanciones[i] != canciones)
                 {
                     //Se sabe que la canción no es repetida, y que el array no se ha llenado, entonces se suma el contador
+                    i++;
                     listaCanciones[i] = canciones;
                     Console.Clear();
                     Console.WriteLine("¿Desea ingresar otra canción?");
@@ -500,7 +494,7 @@ namespace RepasoFundamentos1
                     if (seguirIngresando == 0)
                     {
                         //Se continua el ciclo, y el proceso del for
-                        i++;
+                        
                     }
                     else
                     {
@@ -509,6 +503,13 @@ namespace RepasoFundamentos1
                         return listaCanciones;
                     
                     }
+                }
+                else
+                {
+                    //Condicional para identificar canciones repetidas antes de preguntar por más canciones
+                    Console.WriteLine("La canción ingresada ya se encuentra en la lista");
+                    Console.WriteLine("Presione cualquier tecla para continuar");
+                    Console.ReadKey();
                 }
             }
             //Modificar lista de canciones
