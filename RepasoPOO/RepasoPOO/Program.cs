@@ -476,6 +476,8 @@ namespace RepasoFundamentos1
                 {
                     //Condicional para identificar canciones repetidas antes de preguntar por más canciones
                     Console.WriteLine("La canción ingresada ya se encuentra en la lista");
+                    Console.WriteLine("Presione cualquier tecla para continuar");
+                    Console.ReadKey();
                 }
                 else
                 {
@@ -579,35 +581,30 @@ namespace RepasoFundamentos1
         static void MostrarLista(string[] listaCanciones1)
         {
             //Variables 
-            string[,] mostrarLista = new string[2, listaCanciones1.Length];
+            string[] listaAscendente = new string[listaCanciones1.Length];
+            string[] listaDescendente = new string[listaCanciones1.Length];
             //primera columna: lista ascendente
             //segunda columna: lista descendente
             Console.Clear();
             //Llenando la primera columna de la matriz
-            for (int i = 0; i < mostrarLista.GetLength(0); i++)
+            for (int i = 0; i < listaCanciones1.Length; i++)
             {
-                for (int j = 0; j < mostrarLista.GetLength(1); j++)
-                {
-                    mostrarLista[0, j] = listaCanciones1[i];
-                }
+
+                listaAscendente[i] = listaCanciones1[i];
+                Console.WriteLine(listaAscendente[i]);
             }
             //Llenando la segunda columna de la matriz
-            for (int i = 0; i < mostrarLista.GetLength(0); i++)
+            for (int i = listaCanciones1.Length-1; i <= 0; i--)
             {
-                for (int j = mostrarLista.GetLength(1)-1; j < 0; j++)
-                {
-                    mostrarLista[1, j] = listaCanciones1[i];
-                }
+                listaDescendente[i] = listaCanciones1[i];
+                Console.WriteLine(listaDescendente[i]);
             }
             //Mostrando la matriz de las canciones
-            Console.WriteLine("La lista de las canciones es:");
-            for (int i = 0; i < mostrarLista.GetLength(0); i++)
-            {
-                for (int j = 0; j < mostrarLista.GetLength(1); j++)
-                {
-                    Console.WriteLine(mostrarLista[i,j]);
-                }
-            }
+            //Console.WriteLine("La lista de las canciones es:");
+            //for (int i = 0; i < listaDescendente.Length; i++)
+            //{
+            //    Console.WriteLine($"{listaAscendente[i]},{listaDescendente[i]}");
+            //}
             Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
             Console.ReadKey();
             Menu();
