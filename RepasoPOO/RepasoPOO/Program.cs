@@ -591,20 +591,21 @@ namespace RepasoFundamentos1
             {
 
                 listaAscendente[i] = listaCanciones1[i];
-                Console.WriteLine(listaAscendente[i]);
             }
             //Llenando la segunda columna de la matriz
-            for (int i = listaCanciones1.Length-1; i <= 0; i--)
+            int contadorDescendente = 0;
+
+            for (int i = listaCanciones1.Length - 1; i >= 0; i--) //Hacemos que el contador del array empiece en la última posición y llegue a la primera
             {
-                listaDescendente[i] = listaCanciones1[i];
-                Console.WriteLine(listaDescendente[i]);
+                listaDescendente[contadorDescendente] = listaCanciones1[i];
+                contadorDescendente++; //Así hacemos que el array nuevo invierta la posición mientras el for empieza desde la última posición
             }
-            //Mostrando la matriz de las canciones
-            //Console.WriteLine("La lista de las canciones es:");
-            //for (int i = 0; i < listaDescendente.Length; i++)
-            //{
-            //    Console.WriteLine($"{listaAscendente[i]},{listaDescendente[i]}");
-            //}
+            //mostrando la matriz de las canciones
+            Console.WriteLine("la lista de las canciones es:");
+            for (int i = 0; i < listaAscendente.Length; i++)
+            {
+                Console.WriteLine($"{listaAscendente[i]},{listaDescendente[i]}");
+            }
             Console.WriteLine("Presione cualquier tecla para regresar al menú principal");
             Console.ReadKey();
             Menu();
