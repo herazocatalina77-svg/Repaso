@@ -530,6 +530,7 @@ namespace RepasoFundamentos1
             Console.WriteLine("Ingrese el número 1 para eliminar las canciones de la lista ");
             Console.WriteLine("Ingrese el número 2 para mostrar la lista de canciones");
             Console.WriteLine("Ingrese el número 3 para actualizar un nombre de la lista de canciones ");
+            Console.WriteLine("Ingrese el número 4 para crearlo en archivo de texto");
             Console.WriteLine("Ingrese otra opción para volver al número inicial");
             opcionesLista = Console.ReadLine();
             switch (opcionesLista)
@@ -542,6 +543,11 @@ namespace RepasoFundamentos1
                     break;
                 case "3":
                     ActualizarCanciones(listacanciones);
+                    break;
+                //Escribir la lista en un archivo de texto
+                //Cargar una lista de canciones de un archivo de texto plano
+                case "4":
+                    EscribirArchivoTexto(listacanciones);
                     break;
                 default:
                     Menu();
@@ -642,6 +648,11 @@ namespace RepasoFundamentos1
                 Console.ReadKey();
                 Menu();
             }
+        }
+        static void EscribirArchivoTexto(string[] listaCanciones1)
+        {
+            File.WriteAllLines("canciones.txt", listaCanciones1);
+
         }
     }
 }
