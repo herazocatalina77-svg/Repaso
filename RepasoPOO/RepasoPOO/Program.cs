@@ -468,52 +468,136 @@ namespace RepasoFundamentos1
             cantidadCanciones = Int32.Parse(Console.ReadLine());
             //Declarando e inicializando el vector 
             string[] listaCanciones = new string[cantidadCanciones];
-            for (int i = 0; i < listaCanciones.Length;)
+            int i = 0;
+
+            do
             {
-                Console.Clear();
                 Console.WriteLine($"Ingrese la canción {i + 1}");
                 canciones = Console.ReadLine().ToUpper();
-                if (listaCanciones[i] != canciones)
+                if (i == 0)
                 {
-                    //Se sabe que la canción no es repetida, y que el array no se ha llenado, entonces se suma el contador
-
-                    //Console.Clear();
                     listaCanciones[i] = canciones;
-                    Console.WriteLine("¿Desea ingresar otra canción?");
-                    Console.WriteLine("Si desea seguir colocando canciones, ingrese el número 0");
-                    Console.WriteLine("Si no desea seguir ingresando canciones, ingrese el número 1");
-                    seguirIngresando = Int32.Parse(Console.ReadLine());
-                    if (seguirIngresando == 0 && i == listaCanciones.Length - 1)
-                    {
-                        Console.WriteLine("Haz llegado a la capacidad máxima de canciones");
-                        Console.WriteLine("Entonces serás redirigido al menú de modificación de la lista de canciones");
-                        Console.WriteLine("Presione cualquier tecla");
-                        Console.ReadKey();
-                        MenucitoCanciones(listaCanciones);
-                        return listaCanciones; //El array se llenó y llegó a su proceso final, entonces se devuelve el valor de la lista
-                    }
-                    if (seguirIngresando == 0)
-                    {
-                        //Se continua el ciclo, y el proceso del for
-                        i++;
-
-                    }
-                    else
-                    {
-                        //Se rompe el for, dejando espacios del array vacíos para llenarlos después
-                        MenucitoCanciones(listaCanciones);
-                        return listaCanciones;
-
-                    }
+                    i++;
                 }
                 else
                 {
-                    //Condicional para identificar canciones repetidas antes de preguntar por más canciones
-                    Console.WriteLine("La canción ingresada ya se encuentra en la lista");
-                    Console.WriteLine("Presione cualquier tecla para continuar");
-                    Console.ReadKey();
+                    for (int j = 0; j < i;)
+                    {
+                        if (listaCanciones[j] == canciones)
+                        {
+                            Console.WriteLine("La canción ingresa da ya se encuentra en la lista");
+                            Console.WriteLine("Presione cualquier tecla para continuar");
+                            Console.ReadKey();
+                            Console.WriteLine($"Ingrese la canción {i + 1}");
+                            canciones = Console.ReadLine().ToUpper();
+                        }
+                        else
+                        {
+                            listaCanciones[i] = canciones;
+                            j++;
+                        }
+                    }
+                    //if (listaCanciones[i - 1] != canciones)
+                    //{
+                        Console.WriteLine("¿Desea ingresar otra canción?");
+                        Console.WriteLine("Si desea seguir colocando canciones, ingrese el número 0");
+                        Console.WriteLine("Si no desea seguir ingresando canciones, ingrese el número 1");
+                        seguirIngresando = Int32.Parse(Console.ReadLine());
+                        if (seguirIngresando == 0 && i == listaCanciones.Length - 1)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Has llegado a la capacidad máxima de canciones");
+                            Console.WriteLine("Entonces serás redirigido al menú de modificación de la lista de canciones");
+                            Console.WriteLine("Presione cualquier tecla");
+                            Console.ReadKey();
+                            MenucitoCanciones(listaCanciones);
+                            return listaCanciones; //El array se llenó y llegó a su proceso final, entonces se devuelve el valor de la lista
+                        }
+                        if (seguirIngresando == 0)
+                        {
+                            //Se continua el ciclo, y el proceso del for
+                            i++;
+
+                        }
+                    //}
                 }
+                //else
+                //{
+                //    Console.WriteLine("La canción ingresada ya se encuentra en la lista");
+                //    Console.WriteLine("Presione cualquier tecla para continuar");
+                //    Console.ReadKey();
+                //}
             }
+            while (i < cantidadCanciones);
+
+           
+            //for (int i = 0; i < listaCanciones.Length;)
+            //{
+            //    do
+            //    {
+
+
+            //        Console.Clear();
+            //        Console.WriteLine($"Ingrese la canción {i + 1}");
+            //        canciones = Console.ReadLine().ToUpper();
+            //        listaCanciones[i] = canciones;
+            //        //for (int j = 0; j < i+1 ; j++)
+            //        //{
+            //        //    if (j!=0 && listaCanciones[j] == canciones)
+            //        //    {
+            //        //        //Condicional para identificar canciones repetidas antes de preguntar por más canciones
+            //               //Console.WriteLine("La canción ingresada ya se encuentra en la lista");
+            //               //Console.WriteLine("Presione cualquier tecla para continuar");
+            //               //Console.ReadKey();
+
+            //        //    }
+            //        //    else
+            //        //    {
+            //        //        break;
+            //        //    }
+            //        //}
+            //        //if (listaCanciones[i] != canciones)
+            //        //{
+            //        //Se sabe que la canción no es repetida, y que el array no se ha llenado, entonces se suma el contador
+
+            //        Console.Clear();
+            //        Console.WriteLine("¿Desea ingresar otra canción?");
+            //        Console.WriteLine("Si desea seguir colocando canciones, ingrese el número 0");
+            //        Console.WriteLine("Si no desea seguir ingresando canciones, ingrese el número 1");
+            //        seguirIngresando = Int32.Parse(Console.ReadLine());
+            //        if (seguirIngresando == 0 && i == listaCanciones.Length - 1)
+            //        {
+            //            Console.Clear();
+            //            Console.WriteLine("Has llegado a la capacidad máxima de canciones");
+            //            Console.WriteLine("Entonces serás redirigido al menú de modificación de la lista de canciones");
+            //            Console.WriteLine("Presione cualquier tecla");
+            //            Console.ReadKey();
+            //            MenucitoCanciones(listaCanciones);
+            //            return listaCanciones; //El array se llenó y llegó a su proceso final, entonces se devuelve el valor de la lista
+            //        }
+            //        if (seguirIngresando == 0)
+            //        {
+            //            //Se continua el ciclo, y el proceso del for
+            //            i++;
+
+            //        }
+            //        else
+            //        {
+            //            //Se rompe el for, dejando espacios del array vacíos para llenarlos después
+            //            MenucitoCanciones(listaCanciones);
+            //            return listaCanciones;
+            //        }
+            //        //}
+            //        //else
+            //        //{
+            //        //}
+            //    }
+            //    while (listaCanciones[i] != canciones);
+            //    Console.Clear();
+            //    Console.WriteLine("La canción ingresada ya se encuentra en la lista");
+            //    Console.WriteLine("Presione cualquier tecla para continuar");
+            //    Console.ReadKey();
+            //}
             //Modificar lista de canciones
             //Eliminar canciones de lista
             //Mostrar la lista canciones
