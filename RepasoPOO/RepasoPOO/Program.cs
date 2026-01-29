@@ -11,8 +11,13 @@ namespace RepasoFundamentos1
             MostrarLista(listaCanciones1);
             EliminarCanciones(listaCanciones1);
             ActualizarCanciones(listaCanciones1);
+            //Funciones que usen la variable retornada de la versión dos de guardar canciones------------------------------
+            List<string> listaCancionesVariableVersion2 = GuardarCancionesVersion2();
+            MostrarListaVersion2(listaCancionesVariableVersion2);
+            ActualizarListaVersion2(listaCancionesVariableVersion2);
+            EliminarCancionesVersion2(listaCancionesVariableVersion2);
         }
-
+        //MENÚ PRINCIPAL----------------------------------------------------------------------------------------------------
         static void Menu()
         {
             int numeroPunto = 0;
@@ -25,7 +30,8 @@ namespace RepasoFundamentos1
                 Console.WriteLine("Ingrese 3 para acceder al tercer punto");
                 Console.WriteLine("Ingrese 4 para acceder al cuarto punto");
                 Console.WriteLine("Ingrese 5 para acceder al quinto punto");
-                Console.WriteLine("Ingrese 6 para acceder al sexto punto"); //PROBAR OPCIONES DEL SUBMENÚ
+                Console.WriteLine("Ingrese 6 para acceder al sexto punto (Versión 1)");
+                Console.WriteLine("Ingrese 7 para acceder al sexto punto (Versión 2)"); //Hecho con dictionary (PROBAR)
                 numeroPunto = Int32.Parse(Console.ReadLine());
                 switch (numeroPunto)
                 {
@@ -48,6 +54,9 @@ namespace RepasoFundamentos1
                     case 6:
                         ListaCanciones();
                         break;
+                    case 7:
+                        GuardarCancionesVersion2();
+                        break;
                     default:
                         Console.WriteLine("Ingrese un número correcto");
                         break;
@@ -55,7 +64,7 @@ namespace RepasoFundamentos1
             }
             while (numeroPunto <= 0 || numeroPunto > 6);
         }
-
+        //PRIMER PUNTO-------------------------------------------------------------------------------------------------------
         static void Fibonacci() //case 1
         {
             Console.Clear();
@@ -78,7 +87,7 @@ namespace RepasoFundamentos1
             Console.ReadKey();
             Menu();
         }
-
+        //SEGUNDO PUNTO---------------------------------------------------------------------------------------------------
         static void Llamadas() //case 2
         {
             Console.Clear();
@@ -115,6 +124,7 @@ namespace RepasoFundamentos1
             }
         }
 
+        //TERCER PUNTO-----------------------------------------------------------------------------------------------------
         static void VectoresPunto3() //case 3
         {
             Console.Clear();
@@ -161,6 +171,7 @@ namespace RepasoFundamentos1
                 Menu();
             }
         }
+        //SUBMENÚ CUARTO PUNTO CON LOS DOS ENUNCIADOS-------------------------------------------------------------------------
         static void MenuEnunciados4() //Case 4
         {
             Console.Clear();
@@ -184,7 +195,7 @@ namespace RepasoFundamentos1
                 Menu();
             }
         }
-
+        //CUARTO PUNTO PRIMER ENUNCIADO----------------------------------------------------------------------------------
         static void Ciclos() //Case 4.1
         {
             Console.Clear();
@@ -238,6 +249,7 @@ namespace RepasoFundamentos1
             Console.ReadKey();
             Menu();
         }
+        //CUARTO PUNTO SEGUNDO ENUNCIADO------------------------------------------------------------------------------
         static void CiclosSegundoEnunciado() //Case 4.2
         {
             Console.Clear();
@@ -257,6 +269,7 @@ namespace RepasoFundamentos1
             Console.ReadKey();
             Menu();
         }
+        //SUBMENÚ DEL QUINTO PUNTO CON LOS DOS ENUNCIADOS---------------------------------------------------------------
         static void MenuPuntosMatrices() //Case 5
         {
             Console.Clear();
@@ -279,7 +292,7 @@ namespace RepasoFundamentos1
                 Menu();
             }
         }
-
+        //PRIMER ENUNCIADO DEL QUINTO PUNTO---------------------------------------------------------------------------------
         static void OperacionesMatrices1() //Case 5.1
         {
             Console.Clear();
@@ -328,7 +341,7 @@ namespace RepasoFundamentos1
             Console.ReadKey();
             Menu();
         }
-
+        //SEGUNDO ENUNCIADO QUINTO PUNTO------------------------------------------------------------------------------------
         static void OperacionesMatrices2() //Case 5.2
         {
             Console.Clear();
@@ -455,6 +468,7 @@ namespace RepasoFundamentos1
                 Menu();
             }
         }
+        //SEXTO PUNTO VERSIÓN 1-------------------------------------------------------------------------------------------
         static string[] ListaCanciones() //Case 6
         {
             Console.Clear();
@@ -631,10 +645,8 @@ namespace RepasoFundamentos1
                 case "3":
                     ActualizarCanciones(listacanciones);
                     break;
-                //Escribir la lista en un archivo de texto
-                //Cargar una lista de canciones de un archivo de texto plano
                 case "4":
-                    //EscribirArchivoTexto(listacanciones);
+                    EscribirArchivoTexto(listacanciones);
                     break;
                 default:
                     Menu();
@@ -749,12 +761,171 @@ namespace RepasoFundamentos1
 
                 }
             }
-            static void EscribirArchivoTexto(string[] listaCanciones1)
+        }
+        static void EscribirArchivoTexto(string[] listaCanciones1)
+        {
+           File.WriteAllLines("canciones.txt", listaCanciones1);
+           Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+           Console.ReadKey();
+           MenucitoCanciones(listaCanciones1);
+        }
+        // SEGUNDA VERSIÓN DEL SEXTO PUNTO -----------------------------------------------------------------------------------------
+        static List<string> GuardarCancionesVersion2()
+        {
+            //Declaración de la lista
+            List<string> listaCanciones = new List<string>();
+            //Variables
+            bool seguirIngresando = false;
+            string cancion = "";
+            int i = 0;
+            Console.Clear();
+            Console.WriteLine("Esta es la segunda versión del sexto punto, hecha con lista");
+            Console.WriteLine("Por ende no tiene un número máximo de canciones");
+            Console.WriteLine("Presione enter para continuar");
+            Console.ReadKey();
+                do
+                {
+                        Console.Clear();
+                        if (i == 0)
+                        {
+                           Console.WriteLine($"Ingrese la canción {i+1}");
+                           cancion = Console.ReadLine().ToUpper();
+                            if (cancion != "")
+                            {
+                                listaCanciones.Add(cancion);
+                                i++;
+                            }
+                            else
+                            {
+                                Console.WriteLine("No se puede ingresar una posición vacía");
+                                Console.WriteLine("Ingrese cualquier tecla para continuar");
+                                Console.Clear();
+                                Console.WriteLine($"Ingrese la canción {i+1}");
+                                cancion = Console.ReadLine().ToUpper();
+                            }
+                        }
+                        else
+                        {
+                                Console.WriteLine($"Ingrese la canción {i+1}");
+                                Console.WriteLine("Si no desea seguir ingresando canciones, presione enter");
+                                cancion = Console.ReadLine().ToUpper();
+                                if (cancion != "" && listaCanciones.Contains(cancion))
+                                {
+                                    Console.WriteLine("La canción ya fue agregada a la lista");
+                                    Console.WriteLine("Presione cualquier tecla para continuar");
+                                    Console.ReadKey();
+                                }
+                                else if (cancion != "")
+                                {
+                                    listaCanciones.Add(cancion);
+                                    i++;
+                                }
+                                else
+                                {
+                                    seguirIngresando = true;
+                                }
+
+                        }
+                }
+                while (seguirIngresando == false);
+
+            Console.Clear();
+            Console.WriteLine("Presione cualquier tecla para acceder al submenú de las canciones");
+            Console.ReadKey();
+            SubMenuCancionesVersion2(listaCanciones);
+            return listaCanciones;
+        }
+        static void SubMenuCancionesVersion2(List<string> listaCanciones2)
+        {
+            //Variables
+            string opcionesSubmenu = "";
+            Console.Clear();
+            Console.WriteLine("SUBMENÚ DE CANCIONES- SEGUNDA VERSIÓN");
+            Console.WriteLine("Ingrese 1 para ver la lista de las canciones");
+            Console.WriteLine("Ingrese 2 para cambiar el nombre de una canción");
+            Console.WriteLine("Ingrese 3 para eliminar alguna canción de la lista");
+            Console.WriteLine("Ingrese 4 para volver al menú principal");
+            opcionesSubmenu = Console.ReadLine();
+            switch (opcionesSubmenu)
             {
-                File.WriteAllLines("canciones.txt", listaCanciones1);
+                case "1":
+                    MostrarListaVersion2(listaCanciones2);
+                    break;
+                case "2":
+                    ActualizarListaVersion2(listaCanciones2);
+                    break;
+                case "3":
+                    EliminarCancionesVersion2(listaCanciones2);
+                    break;
+                case "4":
+                    Menu();
+                    break;
+                default:
+                    Menu();
+                    break;
+            }
+        }
+        static void MostrarListaVersion2(List<string> listaCanciones)
+        {
+            foreach (string cancion in listaCanciones)
+            {
+                Console.WriteLine(listaCanciones); //CAMBIAR
+            }
+            listaCanciones.Reverse();
+            Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+            Console.ReadKey();
+            SubMenuCancionesVersion2(listaCanciones);
+        }
+        static void ActualizarListaVersion2(List<string> listaCanciones)
+        {
+            //Variables 
+            string cancionNueva = "";
+            string cancionPorCambiar = "";
+            //int posicionCancionActualizar = 0;
+            Console.WriteLine("Ingrese el nombre de la canción que desea actualizar");
+            cancionPorCambiar = Console.ReadLine();
+            if (listaCanciones.Contains(cancionNueva))
+            {
+                listaCanciones.IndexOf(cancionPorCambiar);
+                Console.WriteLine("Ingrese el nombre de la nueva canción");
+                cancionNueva = Console.ReadLine();
+                listaCanciones.Insert(0, cancionNueva);
+                Console.WriteLine("Canción actualizada");
                 Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                 Console.ReadKey();
-                MenucitoCanciones(listaCanciones1);
+                SubMenuCancionesVersion2(listaCanciones);
+            }
+            else
+            {
+                Console.WriteLine("La canción ingresada no se encuentra en la lista");
+                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+                Console.ReadKey();
+                SubMenuCancionesVersion2(listaCanciones);
+            }
+            Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+            Console.ReadKey();
+            SubMenuCancionesVersion2(listaCanciones);
+        }
+        static void EliminarCancionesVersion2(List<string> listaCanciones)
+        {
+            //Variables 
+            //int posicionCancionEliminar = 0;
+            string cancionEliminar = "";
+            Console.WriteLine("Ingrese el nombre de la canción que desea eliminar");
+            cancionEliminar = Console.ReadLine().ToUpper();
+            if (listaCanciones.Contains(cancionEliminar))
+            {
+                listaCanciones.Insert(1, "");
+                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+                Console.ReadKey();
+                SubMenuCancionesVersion2(listaCanciones);
+            }
+            else
+            {
+                Console.WriteLine("La canción ingresada no se encuentra en la lista");
+                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+                Console.ReadKey();
+                SubMenuCancionesVersion2(listaCanciones);
             }
         }
     }
