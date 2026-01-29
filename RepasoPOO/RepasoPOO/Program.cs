@@ -31,7 +31,7 @@ namespace RepasoFundamentos1
                 Console.WriteLine("Ingrese 4 para acceder al cuarto punto");
                 Console.WriteLine("Ingrese 5 para acceder al quinto punto");
                 Console.WriteLine("Ingrese 6 para acceder al sexto punto (Versión 1)");
-                Console.WriteLine("Ingrese 7 para acceder al sexto punto (Versión 2)"); //Hecho con dictionary (PROBAR)
+                Console.WriteLine("Ingrese 7 para acceder al sexto punto (Versión 2)"); //Hecho con lista
                 numeroPunto = Int32.Parse(Console.ReadLine());
                 switch (numeroPunto)
                 {
@@ -883,13 +883,14 @@ namespace RepasoFundamentos1
             string cancionPorCambiar = "";
             //int posicionCancionActualizar = 0;
             Console.WriteLine("Ingrese el nombre de la canción que desea actualizar");
-            cancionPorCambiar = Console.ReadLine();
+            cancionPorCambiar = Console.ReadLine().ToUpper();
             if (listaCanciones.Contains(cancionNueva))
             {
-                listaCanciones.IndexOf(cancionPorCambiar);
+                //listaCanciones.IndexOf(cancionPorCambiar);
                 Console.WriteLine("Ingrese el nombre de la nueva canción");
-                cancionNueva = Console.ReadLine();
-                listaCanciones.Insert(0, cancionNueva);
+                cancionNueva = Console.ReadLine().ToUpper();
+                listaCanciones.Insert(listaCanciones.IndexOf(cancionPorCambiar), cancionNueva);
+                Console.Clear();
                 Console.WriteLine("Canción actualizada");
                 Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                 Console.ReadKey();
@@ -897,14 +898,12 @@ namespace RepasoFundamentos1
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("La canción ingresada no se encuentra en la lista");
                 Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                 Console.ReadKey();
                 SubMenuCancionesVersion2(listaCanciones);
             }
-            Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
-            Console.ReadKey();
-            SubMenuCancionesVersion2(listaCanciones);
         }
         static void EliminarCancionesVersion2(List<string> listaCanciones)
         {
@@ -915,13 +914,17 @@ namespace RepasoFundamentos1
             cancionEliminar = Console.ReadLine().ToUpper();
             if (listaCanciones.Contains(cancionEliminar))
             {
-                listaCanciones.Insert(1, "");
+                Console.Clear();
+                //listaCanciones.IndexOf(cancionEliminar);
+                listaCanciones.Insert(listaCanciones.IndexOf(cancionEliminar), "");
+                Console.WriteLine("Canción eliminada");
                 Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                 Console.ReadKey();
                 SubMenuCancionesVersion2(listaCanciones);
             }
             else
             {
+                Console.Clear();
                 Console.WriteLine("La canción ingresada no se encuentra en la lista");
                 Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
                 Console.ReadKey();
