@@ -869,7 +869,7 @@ namespace RepasoFundamentos1
         {
             foreach (string cancion in listaCanciones)
             {
-                Console.WriteLine(listaCanciones); //CAMBIAR
+                //Console.WriteLine(listaCanciones); //CAMBIAR
             }
             listaCanciones.Reverse();
             Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
