@@ -867,40 +867,42 @@ namespace RepasoFundamentos1
         }
         //Lo que falta
         //1.Mostrar la lista
-        //2.Probar si funciona actualizarla o eliminarla
         //3.Lista descendente
         static void MostrarListaVersion2(List<string> listaCanciones)
         {
+            Console.Clear();
+            Console.WriteLine("LISTA ASCENDENTEMENTE");
             foreach (string cancion in listaCanciones)
             {
                 Console.WriteLine(cancion);
             }
-            List<string> listaDescendente = new List<string>();
-            //listaDescendente = listaCanciones.Reverse();
-            //foreach (string cancion in listaDescendente)
-            //{
-            //    Console.WriteLine(cancion);
-            //}
+            Console.WriteLine("LISTA DESCENDENTEMENTE");
+            listaCanciones.Reverse();
+            foreach (string cancion in listaCanciones)
+            {
+                Console.WriteLine(cancion);
+            }
             Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
             Console.ReadKey();
             SubMenuCancionesVersion2(listaCanciones);
         }
         static void ActualizarListaVersion2(List<string> listaCanciones)
         {
+            Console.Clear();
             //Variables 
             string cancionNueva = "";
             string cancionPorCambiar = "";
-            //int posicionCancionActualizar = 0;
             Console.WriteLine("Ingrese el nombre de la canción que desea actualizar");
             cancionPorCambiar = Console.ReadLine().ToUpper();
-            bool eliminado = listaCanciones.Remove(cancionPorCambiar);
-                if (eliminado)
+                if (listaCanciones.Contains(cancionPorCambiar))
                 {
+                //Con este condicional sabemos que la canción que se quiere cambiar está en la lista
+                    int posicionCancionActualizar = listaCanciones.IndexOf(cancionPorCambiar); //Buscamos la posición de la canción que se quiere cambiar
+                    listaCanciones.Remove(cancionPorCambiar); //Se elimina la canción para que no siga existiendo en la lista
                     Console.Clear();
-                    //listaCanciones.IndexOf(cancionPorCambiar);
                     Console.WriteLine("Ingrese el nombre de la nueva canción");
                     cancionNueva = Console.ReadLine().ToUpper();
-                    listaCanciones.Insert(listaCanciones.IndexOf(cancionPorCambiar), cancionNueva);
+                    listaCanciones.Insert(posicionCancionActualizar, cancionNueva); //Se reemplaza la nueva canción en la posición de la canción anterior
                     Console.Clear();
                     Console.WriteLine("Canción actualizada");
                     Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
@@ -920,8 +922,8 @@ namespace RepasoFundamentos1
         }
         static void EliminarCancionesVersion2(List<string> listaCanciones)
         {
+            Console.Clear();
             //Variables 
-            //int posicionCancionEliminar = 0;
             string cancionEliminar = "";
             Console.WriteLine("Ingrese el nombre de la canción que desea eliminar");
             cancionEliminar = Console.ReadLine().ToUpper();
@@ -943,6 +945,7 @@ namespace RepasoFundamentos1
                     Console.WriteLine("Canción no encontrada");
                     Console.WriteLine("Presione enter para continuar");
                     Console.ReadKey();
+                    SubMenuCancionesVersion2(listaCanciones);
 
                 }
             }
