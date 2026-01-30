@@ -865,13 +865,22 @@ namespace RepasoFundamentos1
                     break;
             }
         }
+        //Lo que falta
+        //1.Mostrar la lista
+        //2.Probar si funciona actualizarla o eliminarla
+        //3.Lista descendente
         static void MostrarListaVersion2(List<string> listaCanciones)
         {
             foreach (string cancion in listaCanciones)
             {
-                //Console.WriteLine(listaCanciones); //CAMBIAR
+                Console.WriteLine(cancion);
             }
-            listaCanciones.Reverse();
+            List<string> listaDescendente = new List<string>();
+            //listaDescendente = listaCanciones.Reverse();
+            //foreach (string cancion in listaDescendente)
+            //{
+            //    Console.WriteLine(cancion);
+            //}
             Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
             Console.ReadKey();
             SubMenuCancionesVersion2(listaCanciones);
@@ -884,26 +893,30 @@ namespace RepasoFundamentos1
             //int posicionCancionActualizar = 0;
             Console.WriteLine("Ingrese el nombre de la canción que desea actualizar");
             cancionPorCambiar = Console.ReadLine().ToUpper();
-            if (listaCanciones.Contains(cancionNueva))
-            {
-                //listaCanciones.IndexOf(cancionPorCambiar);
-                Console.WriteLine("Ingrese el nombre de la nueva canción");
-                cancionNueva = Console.ReadLine().ToUpper();
-                listaCanciones.Insert(listaCanciones.IndexOf(cancionPorCambiar), cancionNueva);
-                Console.Clear();
-                Console.WriteLine("Canción actualizada");
-                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
-                Console.ReadKey();
-                SubMenuCancionesVersion2(listaCanciones);
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("La canción ingresada no se encuentra en la lista");
-                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
-                Console.ReadKey();
-                SubMenuCancionesVersion2(listaCanciones);
-            }
+            bool eliminado = listaCanciones.Remove(cancionPorCambiar);
+                if (eliminado)
+                {
+                    Console.Clear();
+                    //listaCanciones.IndexOf(cancionPorCambiar);
+                    Console.WriteLine("Ingrese el nombre de la nueva canción");
+                    cancionNueva = Console.ReadLine().ToUpper();
+                    listaCanciones.Insert(listaCanciones.IndexOf(cancionPorCambiar), cancionNueva);
+                    Console.Clear();
+                    Console.WriteLine("Canción actualizada");
+                    Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+                    Console.ReadKey();
+                    SubMenuCancionesVersion2(listaCanciones);
+
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("La canción ingresada no se encuentra en la lista");
+                    Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+                    Console.ReadKey();
+                    SubMenuCancionesVersion2(listaCanciones);
+
+                }
         }
         static void EliminarCancionesVersion2(List<string> listaCanciones)
         {
@@ -916,11 +929,22 @@ namespace RepasoFundamentos1
             {
                 Console.Clear();
                 //listaCanciones.IndexOf(cancionEliminar);
-                listaCanciones.Insert(listaCanciones.IndexOf(cancionEliminar), "");
-                Console.WriteLine("Canción eliminada");
-                Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
-                Console.ReadKey();
-                SubMenuCancionesVersion2(listaCanciones);
+                bool eliminado = listaCanciones.Remove(cancionEliminar);
+                if (eliminado)
+                {
+                    Console.WriteLine("Canción eliminada");
+                    Console.WriteLine("Presione cualquier tecla para regresar al submenú de las canciones");
+                    Console.ReadKey();
+                    SubMenuCancionesVersion2(listaCanciones);
+
+                }
+                else
+                {
+                    Console.WriteLine("Canción no encontrada");
+                    Console.WriteLine("Presione enter para continuar");
+                    Console.ReadKey();
+
+                }
             }
             else
             {
